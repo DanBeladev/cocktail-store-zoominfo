@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+.product {
+  max-width: 350px;
+  margin: 10px 5px;
+}
+
+.header {
+  background-image: url('../../../assets/db-logo-600w-620688317.jpg');
+  background-size: cover;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,47 @@
+<mat-card>
+  <form (submit)="onPurchaseHandler(purchaseForm)" #purchaseForm="ngForm">
+    <mat-form-field>
+      <input
+      matInput
+       type="text"
+        name="userId"
+         ngModel
+         required
+         minlength="6"
+         placeholder="ID"
+         #userId="ngModel"
+         >
+         <mat-error *ngIf="userId.invalid">Please enter a ID.</mat-error>
+    </mat-form-field>
+  <mat-form-field>
+    <input
+    matInput
+     type="text"
+      name="userName"
+       ngModel
+       required
+       minlength="3"
+       placeholder="Full Name"
+       #userName="ngModel"
+       >
+       <mat-error *ngIf="userName.invalid">Please enter a Name.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+    matInput
+     type="text"
+      name="userCreditNumber"
+       ngModel
+       required
+       minlength="10"
+       placeholder="Credit Number"
+       #userCreditNumber="ngModel"
+       >
+       <mat-error *ngIf="userCreditNumber.invalid">Please enter a Credit Number.</mat-error>
+  </mat-form-field>
+<button
+mat-raised-button
+color ="primary"
+type="submit">Accept & Buy </button>
+</form>
+</mat-card>
