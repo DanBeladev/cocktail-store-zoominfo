@@ -1,5 +1,6 @@
-.header {
- width: 100%;
- align-items: flex-start;
- justify-content: center;
+.logo {
+  height:40px;
+  width:50px;
+  border-radius: 50%;
+  margin: 0px 10px;
 }

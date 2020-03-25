@@ -82,7 +82,7 @@ body {
 
 @media screen and (min-width: 1000px) {
   .product {
-    max-width: 380px;
+    max-width: 400px;
     align-items: center;
     align-content: center;
     display: flexbox;
