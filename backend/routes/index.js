@@ -1,5 +1,9 @@
 // import notebook from '../controllers/notebookController';
 import products from '../controllers/productsController';
+import users from '../controllers/usersController'
+import usersRoute from './users-route';
+import productsRoute from './products-route';
+
 export default (app) => {
     // app.route('/notes')
     //     .get(notebook.getAllNotes)
@@ -13,6 +17,19 @@ export default (app) => {
     // app.route('/')
     // .get(notebook.arrivedNotes)
 
-     app.route('/products')
-        .get(products.getRandomProducts)
+    //  app.route('/products')
+    //     .get(products.getProductsFromMemory)
+
+    // Products routes
+
+    app.use('/products', productsRoute);
+    // app.route('/products')
+    //     .get((req, res) => {
+    //         res.send(products.getProductsFromMemory());
+    //     })
+
+
+    // User routes
+    app.use('/users', usersRoute);
+        
 };

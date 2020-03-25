@@ -1,4 +1,7 @@
-
+body {
+  margin: 0;
+  padding: 0;
+}
 :host {
   display: block;
   margin-top: 1rem;
@@ -35,9 +38,56 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.spinner {
+  display: flex;
+  justify-content: center;
+}
 
 .footer {
   display: flex;
   justify-content: space-around;
   align-items: baseline;
 }
+
+
+@media screen and (max-width: 800px) {
+  .list {
+    margin:0;
+    width: 100%;
+  }
+  .product {
+   max-width: 250px;
+   align-items: center;
+   align-content: center;
+   display: flexbox;
+   justify-content: center;
+   left: 15%;
+  }
+  * {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .product {
+    max-width: 200px;
+    align-items: center;
+    align-content: center;
+    display: flexbox;
+    justify-content: center;
+    left: 15%;
+   }
+}
+
+@media screen and (min-width: 1000px) {
+  .product {
+    max-width: 380px;
+    align-items: center;
+    align-content: center;
+    display: flexbox;
+    justify-content: center;
+    left: 15%;
+   }
+}
+

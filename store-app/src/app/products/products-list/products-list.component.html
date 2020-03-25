@@ -17,4 +17,6 @@
 </mat-card-footer>
   </mat-card>
 </mat-accordion>
-<p *ngIf="products.length<=0">No products yet !</p>
+<div *ngIf="products.length<=0" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>

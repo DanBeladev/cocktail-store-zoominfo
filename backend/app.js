@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors())
 
+
 // catch 400
 app.use((err, req, res, next) => {
   console.log(err.stack);
@@ -32,7 +33,6 @@ app.use((err, req, res, next) => {
 /**
  * Register the routes
  */
-
 routes(app);
 
 export default app;
