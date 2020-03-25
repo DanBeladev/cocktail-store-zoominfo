@@ -1,3 +1,4 @@
+
 :host {
   display: block;
   margin-top: 1rem;
@@ -7,16 +8,36 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: aliceblue;
 }
 
 
 .product {
   max-width: 350px;
+  max-height: 650px;
   margin: 10px 5px;
+}
+
+.price {
+  font-weight: bold;
+
 }
 
 .header {
   background-image: url('../../../assets/db-logo-600w-620688317.jpg');
   background-size: cover;
   margin-bottom: 5px;
+}
+
+.description{
+  height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
 }

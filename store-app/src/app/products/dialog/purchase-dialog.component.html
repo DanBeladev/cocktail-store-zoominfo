@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="container">
   <form (submit)="onPurchaseHandler(purchaseForm)" #purchaseForm="ngForm">
     <mat-form-field>
       <input
@@ -13,6 +13,7 @@
          >
          <mat-error *ngIf="userId.invalid">Please enter a ID.</mat-error>
     </mat-form-field>
+    <br>
   <mat-form-field>
     <input
     matInput
@@ -26,6 +27,7 @@
        >
        <mat-error *ngIf="userName.invalid">Please enter a Name.</mat-error>
   </mat-form-field>
+  <br>
   <mat-form-field>
     <input
     matInput
@@ -39,6 +41,7 @@
        >
        <mat-error *ngIf="userCreditNumber.invalid">Please enter a Credit Number.</mat-error>
   </mat-form-field>
+  <br>
 <button
 mat-raised-button
 color ="primary"

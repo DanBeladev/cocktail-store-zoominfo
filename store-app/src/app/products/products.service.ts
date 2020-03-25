@@ -8,11 +8,12 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  public products: Product[] = this.getProducts();
+  public products: Product[] = []; /* = this.getProducts(); */
   private productsUpdated = new Subject<Product[]>();
 
   getProducts() {
-    return productsList;
+    this.http.get<Product[]>('http://localhost:3000/products', {responseType: 'json'})
+      .subscribe((productsApi) => {productsApi.forEach(product => this.products.push(product)); });
   }
 
 

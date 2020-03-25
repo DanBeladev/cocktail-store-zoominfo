@@ -1,5 +1,5 @@
 // import notebook from '../controllers/notebookController';
-
+import products from '../controllers/productsController';
 export default (app) => {
     // app.route('/notes')
     //     .get(notebook.getAllNotes)
@@ -12,4 +12,7 @@ export default (app) => {
 
     // app.route('/')
     // .get(notebook.arrivedNotes)
+
+     app.route('/products')
+        .get(products.getRandomProducts)
 };
