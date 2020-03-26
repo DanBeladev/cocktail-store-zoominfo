@@ -40,7 +40,7 @@ function getProducts(count, onSuccess, onError) {
                 title: drink.strDrink,
                 picture: drink.strDrinkThumb,
                 description: drink.strInstructions,
-                price: getRandomInt(50) + '$'
+                price: getRandomInt(50)
             }
  
             resolve(product);

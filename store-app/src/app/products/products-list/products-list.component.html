@@ -5,14 +5,13 @@
     <mat-card-title>{{product.title}}</mat-card-title>
   </mat-card-header>
   <img mat-card-image src="{{product.picture}}">
-  <!-- <img mat-card-image src="https://picsum.photos/400/300?random={{product._id}}"> -->
     <mat-card-content>
       <div class="description">{{product.description}}</div>
     </mat-card-content>
     <mat-card-footer>
     <mat-card-actions class="footer">
-      <button mat-button color="primary" (click)="openBuyDialog()">Buy Now</button>
-      <p class="price">Price: {{product.price}}</p>
+      <button mat-button color="primary" (click)="openBuyDialog(product)">Buy Now</button>
+      <p class="price">Price: {{product.price | currency}}</p>
   </mat-card-actions>
 </mat-card-footer>
   </mat-card>

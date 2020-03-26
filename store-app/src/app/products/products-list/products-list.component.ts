@@ -4,6 +4,8 @@ import { Product } from '../product.model';
 import { ProductService } from '../products.service';
 import { MatDialog} from '@angular/material/dialog';
 import {PurchaseDialogComponent } from '../dialog/purchase-dialog.component';
+import { PaypalcomponentComponent } from '../dialog/paypalcomponent/paypalcomponent.component';
+import { PayPalService } from '../pay-pal.service';
 
 @Component({
   selector: 'app-product-list',
@@ -14,15 +16,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
 products: Product[] = this.productService.products;
 private productsSub: Subscription;
 
- constructor(public productService: ProductService, public dialog: MatDialog) {}
+ constructor(public paypalService: PayPalService, public productService: ProductService, public dialog: MatDialog) {}
 
  onDeleteProduct(id: string) {
   // this.productService.deleteProduct(id);
 }
 
-openBuyDialog() {
-  this.dialog.open(PurchaseDialogComponent);
-  console.log('buy');
+openBuyDialog(product) {
+  // this.dialog.open(PurchaseDialogComponent);
+  // this.payPalSercice.getProduct(product);
+  this.paypalService.product = product;
+  this.dialog.open(PaypalcomponentComponent);
 }
 
  ngOnInit() {

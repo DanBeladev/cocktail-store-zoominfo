@@ -16,6 +16,8 @@ import { PurchaseDialogComponent } from './products/dialog/purchase-dialog.compo
 import {FormsModule} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PaypalcomponentComponent } from './products/dialog/paypalcomponent/paypalcomponent.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AppComponent,
     HeaderComponent,
     ProductListComponent,
-    PurchaseDialogComponent
+    PurchaseDialogComponent,
+    PaypalcomponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
