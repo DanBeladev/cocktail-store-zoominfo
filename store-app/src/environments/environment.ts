@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export const URL = {
+  HEROKU_URL: 'https://cocktail-store-backend.herokuapp.com',
+  DEV_URL: 'http://localhost:3000'
+};
+
 export const environment = {
-  production: false
+  production: false,
+  API_URL: URL.DEV_URL,
 };
 
 /*

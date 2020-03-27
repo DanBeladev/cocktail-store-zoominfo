@@ -1,4 +1,45 @@
-.paypalContainer {
-  width: 500px;
-  height: 250px;
+
+::ng-deep .confirm-class .mat-simple-snackbar {
+  color:green;
+  font-weight: bold;
+}
+
+::ng-deep .cancell-class .mat-simple-snackbar {
+ font-weight: bold;
+ color: red;
+}
+
+.header {
+  width: 400px;
+    height: 35px;
+}
+
+.checkout {
+  padding-top: 10px;
+  border-bottom: 2px solid;
+  border-top: 2px solid;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-family: cursive;
+}
+
+.description {
+  max-width: 400px;
+}
+
+.price {
+  text-align: end;
+  font-weight: bold;
+}
+
+@media screen and (max-height:570px)
+{
+  .description {
+    height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+
 }
 :host {
   display: block;
@@ -12,13 +13,6 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   background-color: aliceblue;
-}
-
-
-.product {
-  max-width: 350px;
-  max-height: 650px;
-  margin: 10px 5px;
 }
 
 .price {
@@ -58,19 +52,44 @@ left: 10px;
   font-size: 20px;
 }
 
+.product {
+  max-width: 350px;
+  max-height: 650px;
+  margin: 15px 15px;
+  align-items: center;
+  align-content: center;
+  display: flexbox;
+  justify-content: center;
+}
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 320px) and (max-width: 359px) {
+  .product {
+    max-width: 200px;
+    left: 20px
+   }
+}
+
+@media screen and (min-width:360px) and (max-width: 419px) {
+  .product {
+    max-width: 250px;
+    left: 20px;
+   }
+}
+
+@media screen and (min-width:420px) and (max-width: 799px) {
+  .product {
+    max-width: 250px;
+    left: 35px;
+   }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px){
   .list {
     margin:0;
     width: 100%;
   }
   .product {
    max-width: 250px;
-   align-items: center;
-   align-content: center;
-   display: flexbox;
-   justify-content: center;
-   left: 15%;
   }
   * {
     max-width: 100%;
@@ -78,25 +97,10 @@ left: 10px;
   }
 }
 
-@media screen and (max-width: 350px) {
-  .product {
-    max-width: 200px;
-    align-items: center;
-    align-content: center;
-    display: flexbox;
-    justify-content: center;
-    left: 15%;
-   }
-}
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1001px) {
   .product {
     max-width: 400px;
-    align-items: center;
-    align-content: center;
-    display: flexbox;
-    justify-content: center;
-    left: 15%;
    }
 }
 

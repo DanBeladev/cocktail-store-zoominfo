@@ -2,8 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { PayPalService } from '../../pay-pal.service';
 import { Product } from '../../product.model';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog
+} from '@angular/material/dialog';
 import { PurchaseDialogComponent } from '../purchase-dialog.component';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { TranscationConfirmationDialogComponent } from '../transcation-confirmation-dialog/transcation-confirmation-dialog.component';
 
 @Component({
@@ -13,24 +18,27 @@ import { TranscationConfirmationDialogComponent } from '../transcation-confirmat
 })
 export class PaypalcomponentComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
+  private snackbarConfig = new MatSnackBarConfig();
+
   public product: Product = this.paypalService.product;
-  constructor(public paypalService: PayPalService,
-              public dialogRef: MatDialogRef<PaypalcomponentComponent>,
-              public dialogRefTransactionDetails: MatDialogRef<PurchaseDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Product,
-              public transcationDetailsDialog: MatDialog) {}
+  constructor(
+    public paypalService: PayPalService,
+    public dialogRef: MatDialogRef<PaypalcomponentComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Product,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.initConfig();
+    this.initSnackbarConfig();
   }
 
   private initConfig(): void {
-    console.log('product data: ', this.data);
     this.payPalConfig = {
       currency: 'USD',
       clientId: 'sb',
       createOrderOnClient: data =>
-        ( {
+        ({
           intent: 'CAPTURE',
           purchase_units: [
             {
@@ -56,8 +64,8 @@ export class PaypalcomponentComponent implements OnInit {
                 }
               ]
             }
-          ],
-        }) as ICreateOrderRequest,
+          ]
+        } as ICreateOrderRequest),
       advanced: {
         commit: 'true'
       },
@@ -68,33 +76,21 @@ export class PaypalcomponentComponent implements OnInit {
         size: 'responsive'
       },
       onApprove: (data, actions) => {
-        console.log(
-          'onApprove - transaction was approved, but not authorized',
-          data,
-          actions
-        );
+        console.log(data, actions);
         actions.order.get().then(details => {
-          alert('transcatin approved by: ' + details);
-          console.log(
-            'onApprove - you can get full order details inside onApprove: ',
-            details
-          );
+          console.log(details);
         });
       },
       onClientAuthorization: data => {
+        console.log(data);
         this.paypalService.transactionCompleted(data);
-        alert('transcatin authorizated by: ' + data.payer.name.given_name);
-        console.log(
-          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-          data
-        );
         this.dialogRef.close();
-        const dialogRefTranscationDetails = this.transcationDetailsDialog.open(TranscationConfirmationDialogComponent, {
-          data: 'hello'
-        });
-        dialogRefTranscationDetails.afterClosed().subscribe(resulet => {
-          console.log('The dialog transaction wsa closed');
-        });
+        this.snackbarConfig.panelClass = ['confirm-class'];
+        this.snackBar.open(
+          'Transaction Completed Successfully',
+          'Close',
+          this.snackbarConfig
+        );
       },
       onCancel: (data, actions) => {
         this.handleNotCompletedTeansaction();
@@ -117,6 +113,16 @@ export class PaypalcomponentComponent implements OnInit {
   handleNotCompletedTeansaction(): void {
     this.paypalService.onTransactionCancelled();
     this.dialogRef.close();
-    this.transcationDetailsDialog.open(TranscationConfirmationDialogComponent);
+    this.snackbarConfig.panelClass = ['cancell-class'];
+    this.snackBar.open(
+      'Transaction has been Cancelled',
+      'Close',
+      this.snackbarConfig
+    );
   }
-}
+
+  initSnackbarConfig = () => {
+    this.snackbarConfig.duration = 3000;
+    this.snackbarConfig.verticalPosition = 'top';
+    this.snackbarConfig.horizontalPosition = 'center';
+  }}

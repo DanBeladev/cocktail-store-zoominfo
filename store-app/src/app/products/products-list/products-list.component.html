@@ -1,4 +1,4 @@
-<mat-accordion class="list" multi="true" *ngIf="products.length>0">
+  <div class="list" *ngIf="products.length>0">
   <mat-card class="product"  *ngFor="let product of products">
      <mat-card-header>
     <div mat-card-avatar class="header"></div>
@@ -15,7 +15,7 @@
   </mat-card-actions>
 </mat-card-footer>
   </mat-card>
-</mat-accordion>
+</div>
 <div *ngIf="products.length<=0" class="spinner">
   <mat-spinner></mat-spinner>
 </div>

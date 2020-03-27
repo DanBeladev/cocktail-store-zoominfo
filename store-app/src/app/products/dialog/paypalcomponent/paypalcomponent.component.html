@@ -1,6 +1,11 @@
-<h1>Cocktails Store</h1>
+<h1 class="header">Cocktails Store</h1>
 <mat-action-row></mat-action-row>
-<h2>CHECKOUT</h2>
+<div class="checkout">
+  <h2>CHECKOUT</h2>
+  <h3 class="title">{{this.product.title}}</h3>
+  <p class="description">{{this.product.description}}</p>
+  <h3 class="price">{{this.product.price | currency}}</h3>
+</div>
 <mat-action-row></mat-action-row>
 <h3>Payment method</h3>
 <ngx-paypal [config]="payPalConfig"></ngx-paypal>

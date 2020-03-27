@@ -18,7 +18,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PaypalcomponentComponent } from './products/dialog/paypalcomponent/paypalcomponent.component';
 import { NgxPayPalModule } from 'ngx-paypal';
-import { TranscationConfirmationDialogComponent } from './products/dialog/transcation-confirmation-dialog/transcation-confirmation-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+   TranscationConfirmationDialogComponent
+   } from './products/dialog/transcation-confirmation-dialog/transcation-confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { TranscationConfirmationDialogComponent } from './products/dialog/transc
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
