@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { PayPalService } from '../../pay-pal.service';
 import { Product } from '../../product.model';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-paypalcomponent',
@@ -11,51 +12,55 @@ import { Product } from '../../product.model';
 export class PaypalcomponentComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   public product: Product = this.paypalService.product;
-  constructor(public paypalService: PayPalService) {}
+  constructor(public paypalService: PayPalService, public dialogRef: MatDialogRef<PaypalcomponentComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Product) {}
 
   ngOnInit(): void {
     this.initConfig();
   }
 
   private initConfig(): void {
+    console.log('product data: ', this.data);
     this.payPalConfig = {
-      currency: 'EUR',
+      currency: 'USD',
       clientId: 'sb',
-      createOrderOnClient: (data) =>
-        <ICreateOrderRequest> {
+      createOrderOnClient: data =>
+        ( {
           intent: 'CAPTURE',
           purchase_units: [
             {
               amount: {
-                currency_code: 'EUR',
-                value: '9.99',
+                currency_code: 'USD',
+                value: this.product.price,
                 breakdown: {
                   item_total: {
-                    currency_code: 'EUR',
-                    value: '9.99'
+                    currency_code: 'USD',
+                    value: this.product.price
                   }
                 }
               },
               items: [
                 {
-                  name: 'Enterprise Subscription',
+                  name: this.product.title,
                   quantity: '1',
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
-                    currency_code: 'EUR',
-                    value: '9.99',
-                  },
+                    currency_code: 'USD',
+                    value: this.product.price
+                  }
                 }
               ]
             }
-          ]
-        },
+          ],
+        }) as ICreateOrderRequest,
       advanced: {
         commit: 'true'
       },
       style: {
         label: 'paypal',
-        layout: 'vertical'
+        layout: 'vertical',
+        color: 'gold',
+        size: 'responsive'
       },
       onApprove: (data, actions) => {
         console.log(
@@ -64,6 +69,7 @@ export class PaypalcomponentComponent implements OnInit {
           actions
         );
         actions.order.get().then(details => {
+          alert('transcatin approved by: ' + details);
           console.log(
             'onApprove - you can get full order details inside onApprove: ',
             details
@@ -71,6 +77,8 @@ export class PaypalcomponentComponent implements OnInit {
         });
       },
       onClientAuthorization: data => {
+        this.paypalService.transactionCompleted(data);
+        alert('transcatin authorizated by: ' + data.payer.name.given_name);
         console.log(
           'onClientAuthorization - you should probably inform your server about completed transaction at this point',
           data
@@ -87,5 +95,9 @@ export class PaypalcomponentComponent implements OnInit {
         console.log('onClick', data, actions);
       }
     };
+  }
+
+  onCloseModal(): void {
+    this.dialogRef.close();
   }
 }

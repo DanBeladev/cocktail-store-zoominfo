@@ -19,25 +19,13 @@ export class PurchaseDialogComponent {
     }
 
     const userInput: User = {
-      Id: purchaseForm.value.userId,
+      _id: purchaseForm.value.userId,
       name: purchaseForm.value.userName,
-      creditNumber: purchaseForm.value.userCreditNumber
+      phoneNumber: '',
+      address: '',
+      emailAddress: ''
     };
 
-    const productInput: Product = {
-      _id: '1',
-      description: 'desc',
-      picture: 'dsadasd',
-      price: '213',
-      title: 'dasdas'
-    };
-
-    const purchase: Purchase = {
-      product: productInput,
-      user: userInput
-    };
-
-    console.log(purchase);
     purchaseForm.resetForm();
   }
 }

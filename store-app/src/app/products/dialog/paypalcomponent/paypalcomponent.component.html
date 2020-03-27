@@ -1,5 +1,7 @@
-<p>paypalcomponent works!</p>
-<p>Product price:  {{product.price}}</p>
 <div class="paypalContainer">
+  <img src="/store-app/src/assets/db-logo-600w-620688317.jpg">
+<div>Please choose one of the payments methods below</div>
 <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+<mat-action-row></mat-action-row>
+<button mat-button (click)="onCloseModal()">Not Now</button>
 </div>

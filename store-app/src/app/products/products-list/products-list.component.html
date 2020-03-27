@@ -2,7 +2,7 @@
   <mat-card class="product"  *ngFor="let product of products">
      <mat-card-header>
     <div mat-card-avatar class="header"></div>
-    <mat-card-title>{{product.title}}</mat-card-title>
+    <mat-card-title class="title">{{product.title}}</mat-card-title>
   </mat-card-header>
   <img mat-card-image src="{{product.picture}}">
     <mat-card-content>
@@ -10,8 +10,8 @@
     </mat-card-content>
     <mat-card-footer>
     <mat-card-actions class="footer">
-      <button mat-button color="primary" (click)="openBuyDialog(product)">Buy Now</button>
-      <p class="price">Price: {{product.price | currency}}</p>
+      <button mat-button color="primary" class="buyBtn" (click)="openBuyDialog(product)">Buy Now</button>
+      <p class="price">{{product.price | currency}}</p>
   </mat-card-actions>
 </mat-card-footer>
   </mat-card>

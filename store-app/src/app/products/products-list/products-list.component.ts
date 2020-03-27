@@ -18,16 +18,19 @@ private productsSub: Subscription;
 
  constructor(public paypalService: PayPalService, public productService: ProductService, public dialog: MatDialog) {}
 
- onDeleteProduct(id: string) {
-  // this.productService.deleteProduct(id);
-}
-
 openBuyDialog(product) {
   // this.dialog.open(PurchaseDialogComponent);
   // this.payPalSercice.getProduct(product);
   this.paypalService.product = product;
-  this.dialog.open(PaypalcomponentComponent);
+  const dialogRef = this.dialog.open(PaypalcomponentComponent, {
+    data: product
+  });
+
+  dialogRef.afterClosed().subscribe(resulet => {
+    console.log('The dialog wsa closed');
+  });
 }
+
 
  ngOnInit() {
    this.productService.getProducts();

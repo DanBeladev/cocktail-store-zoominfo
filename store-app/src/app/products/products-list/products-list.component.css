@@ -22,16 +22,21 @@ body {
 }
 
 .price {
+  font-size: 20px;
   font-weight: bold;
 
 }
 
 .header {
-  background-image: url('../../../assets/db-logo-600w-620688317.jpg');
+  /* background-image: url('../../../assets/db-logo-600w-620688317.jpg'); */
   background-size: cover;
   margin-bottom: 5px;
 }
 
+.title {
+position: absolute;
+left: 10px;
+}
 .description{
   height: 40px;
   white-space: nowrap;
@@ -47,6 +52,10 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: baseline;
+}
+
+.buyBtn {
+  font-size: 20px;
 }
 
 
