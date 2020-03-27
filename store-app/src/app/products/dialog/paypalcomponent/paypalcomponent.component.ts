@@ -2,7 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { PayPalService } from '../../pay-pal.service';
 import { Product } from '../../product.model';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import { PurchaseDialogComponent } from '../purchase-dialog.component';
+import { TranscationConfirmationDialogComponent } from '../transcation-confirmation-dialog/transcation-confirmation-dialog.component';
 
 @Component({
   selector: 'app-paypalcomponent',
@@ -12,8 +14,11 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class PaypalcomponentComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   public product: Product = this.paypalService.product;
-  constructor(public paypalService: PayPalService, public dialogRef: MatDialogRef<PaypalcomponentComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Product) {}
+  constructor(public paypalService: PayPalService,
+              public dialogRef: MatDialogRef<PaypalcomponentComponent>,
+              public dialogRefTransactionDetails: MatDialogRef<PurchaseDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Product,
+              public transcationDetailsDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.initConfig();
@@ -83,12 +88,20 @@ export class PaypalcomponentComponent implements OnInit {
           'onClientAuthorization - you should probably inform your server about completed transaction at this point',
           data
         );
-        //  this.showSuccess = true;
+        this.dialogRef.close();
+        const dialogRefTranscationDetails = this.transcationDetailsDialog.open(TranscationConfirmationDialogComponent, {
+          data: 'hello'
+        });
+        dialogRefTranscationDetails.afterClosed().subscribe(resulet => {
+          console.log('The dialog transaction wsa closed');
+        });
       },
       onCancel: (data, actions) => {
+        this.handleNotCompletedTeansaction();
         console.log('OnCancel', data, actions);
       },
       onError: err => {
+        this.handleNotCompletedTeansaction();
         console.log('OnError', err);
       },
       onClick: (data, actions) => {
@@ -99,5 +112,11 @@ export class PaypalcomponentComponent implements OnInit {
 
   onCloseModal(): void {
     this.dialogRef.close();
+  }
+
+  handleNotCompletedTeansaction(): void {
+    this.paypalService.onTransactionCancelled();
+    this.dialogRef.close();
+    this.transcationDetailsDialog.open(TranscationConfirmationDialogComponent);
   }
 }
